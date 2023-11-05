@@ -15,4 +15,10 @@ if (isset($_GET['id'])) {
     echo "</table>";
 
     $conexionProyecto->close();
+} else {
+    header('Location: listado.php');
+    exit;
 }
+echo "<form action='listado.php' method='post'>            
+      <input type='submit' value='Volver'>
+      </form>";
