@@ -8,11 +8,12 @@
     <title>Tarea03</title>
 </head>
 <body>
-<h2>Gestión de productos</h2>
+
 <?php
 require 'conexion.php';
 global $conexionProyecto;
 $resultado = $conexionProyecto->query('SELECT id, nombre FROM productos');
+echo "<h2>Gestión de productos</h2>";
 echo "<table>
       <tr>
         <th>Detalle</th>

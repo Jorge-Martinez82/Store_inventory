@@ -5,6 +5,7 @@ if (isset($_GET['id'])) {
     require 'conexion.php';
     $resultado = $conexionProyecto->query("SELECT * FROM productos WHERE id = $id");
     $producto = $resultado->fetch_object();
+    echo "<h2>Detalle del producto</h2>";
     echo "<table>";
     echo "<tr><th>{$producto->nombre}</th></tr>";
     echo "<tr><td>Codigo: {$producto->id}</td></tr>";
