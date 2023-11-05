@@ -1,24 +1,3 @@
-<?php
-$conexionProyecto = new mysqli('localhost', 'gestor', 'secreto', 'proyecto');
-$error = $conexionProyecto->connect_errno;
-if ($error != null) {
-    echo "<p>Error $error conectando a la base de datos: $conexionProyecto->connect_error</p>";
-    die();
-}
-
-$resultado = $conexionProyecto->query('SELECT id, nombre FROM productos');
-$stock = $resultado->fetch_object();
-while ($stock != null) {
-
-    echo "<p>Producto $stock->nombre: $stock->id id.</p>";
-
-    $stock = $resultado->fetch_object();
-
-}
-
-$conexionProyecto->close();
-?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -31,7 +10,33 @@ $conexionProyecto->close();
 <body>
 <h2>Gestión de productos</h2>
 <?php
+$conexionProyecto = new mysqli('localhost', 'gestor', 'secreto', 'proyecto');
+$error = $conexionProyecto->connect_errno;
+if ($error != null) {
+    echo "<p>Error $error conectando a la base de datos: $conexionProyecto->connect_error</p>";
+    die();
+}
+$resultado = $conexionProyecto->query('SELECT id, nombre FROM productos');
+echo "<table>
+      <tr>
+        <th>Detalle</th>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Acciones</th>
+      </tr>";
 
+while ($stock = $resultado->fetch_object()) {
+    echo "<tr>";
+    echo "<td></td>"; // Detalle, columna vacía por ahora
+    echo "<td>" . $stock->id . "</td>"; // Código, muestra el ID
+    echo "<td>" . $stock->nombre . "</td>"; // Nombre, muestra el Nombre
+    echo "<td></td>"; // Acciones, columna vacía por ahora
+    echo "</tr>";
+}
+
+echo "</table>";
+
+$conexionProyecto->close();
 ?>
 
 </body>
