@@ -9,4 +9,5 @@ if ($error != null) {
     echo "<p>Error $error conectando a la base de datos: $conexionProyecto->connect_error</p>";
     die();
 }
+
 ?>
