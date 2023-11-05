@@ -1,6 +1,7 @@
 <?php
-if (isset($_POST['id'])) {
-    $id = $_POST['id'];
+global $conexionProyecto;
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
     require 'conexion.php';
     $resultado = $conexionProyecto->query("SELECT * FROM productos WHERE id = $id");
     $producto = $resultado->fetch_object();

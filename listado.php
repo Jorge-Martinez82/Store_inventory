@@ -11,6 +11,7 @@
 <h2>Gestión de productos</h2>
 <?php
 require 'conexion.php';
+global $conexionProyecto;
 $resultado = $conexionProyecto->query('SELECT id, nombre FROM productos');
 echo "<table>
       <tr>
@@ -23,7 +24,7 @@ echo "<table>
 while ($stock = $resultado->fetch_object()) {
     echo "<tr>";
     echo "<td>
-            <form action='detalle.php' method='post'>
+            <form action='detalle.php' method='get'>
                 <input type='hidden' name='id' value='{$stock->id}'>
                 <input type='submit' value='Detalle'>
             </form>
