@@ -10,12 +10,7 @@
 <body>
 <h2>Gestión de productos</h2>
 <?php
-$conexionProyecto = new mysqli('localhost', 'gestor', 'secreto', 'proyecto');
-$error = $conexionProyecto->connect_errno;
-if ($error != null) {
-    echo "<p>Error $error conectando a la base de datos: $conexionProyecto->connect_error</p>";
-    die();
-}
+require 'conexion.php';
 $resultado = $conexionProyecto->query('SELECT id, nombre FROM productos');
 echo "<table>
       <tr>
@@ -27,7 +22,12 @@ echo "<table>
 
 while ($stock = $resultado->fetch_object()) {
     echo "<tr>";
-    echo "<td></td>"; // Detalle, columna vacía por ahora
+    echo "<td>
+            <form action='detalle.php' method='post'>
+                <input type='hidden' name='id' value='{$stock->id}'>
+                <input type='submit' value='Detalle'>
+            </form>
+          </td>";
     echo "<td>" . $stock->id . "</td>"; // Código, muestra el ID
     echo "<td>" . $stock->nombre . "</td>"; // Nombre, muestra el Nombre
     echo "<td></td>"; // Acciones, columna vacía por ahora
