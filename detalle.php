@@ -4,7 +4,7 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
     require 'conexion.php';
     $resultado = $conexionProyecto->query("SELECT * FROM productos WHERE id = $id");
-    $producto = $resultado->fetch_object();
+    $producto = $resultado->fetch(PDO::FETCH_OBJ);
     echo "<h2>Detalle del producto</h2>";
     echo "<table>";
     echo "<tr><th>{$producto->nombre}</th></tr>";
@@ -15,7 +15,7 @@ if (isset($_GET['id'])) {
                   Descripcion: {$producto->descripcion}</td></tr>";
     echo "</table>";
 
-    $conexionProyecto->close();
+
 } else {
     header('Location: listado.php');
     exit;
@@ -23,3 +23,5 @@ if (isset($_GET['id'])) {
 echo "<form action='listado.php' method='post'>            
       <input type='submit' value='Volver'>
       </form>";
+$conexionProyecto = null;
+?>

@@ -14,6 +14,9 @@ require 'conexion.php';
 global $conexionProyecto;
 $resultado = $conexionProyecto->query('SELECT id, nombre FROM productos');
 echo "<h2>Gestión de productos</h2>";
+echo "<form action='crear.php' method='post'>
+        <input type='submit' value='Crear'>
+      </form>";
 echo "<table>
       <tr>
         <th>Detalle</th>
@@ -22,7 +25,7 @@ echo "<table>
         <th>Acciones</th>
       </tr>";
 
-while ($stock = $resultado->fetch_object()) {
+while ($stock = $resultado->fetch(PDO::FETCH_OBJ)) {
     echo "<tr>";
     echo "<td>
             <form action='detalle.php' method='get'>
