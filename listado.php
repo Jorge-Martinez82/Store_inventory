@@ -35,13 +35,18 @@ while ($stock = $resultado->fetch(PDO::FETCH_OBJ)) {
           </td>";
     echo "<td>" . $stock->id . "</td>"; // Código, muestra el ID
     echo "<td>" . $stock->nombre . "</td>"; // Nombre, muestra el Nombre
-    echo "<td></td>"; // Acciones, columna vacía por ahora
+    echo "<td>
+            <form action='borrar.php' method='post'>
+                            <input type='hidden' name='id' value='{$stock->id}'>
+                            <input type='submit' value='Borrar'>
+                        </form>
+            </td>";
     echo "</tr>";
 }
 
 echo "</table>";
 
-$conexionProyecto->close();
+$conexionProyecto = null;
 ?>
 
 </body>

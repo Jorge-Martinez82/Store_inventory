@@ -1,3 +1,27 @@
+<?php
+require 'conexion.php';
+global $conexionProyecto;
+if (isset($_POST['nombre']) &&
+    isset($_POST['nombre_corto']) &&
+    isset($_POST['precio']) &&
+    isset($_POST['familia']) &&
+    isset($_POST['descripcion'])){
+    $nombre = $_POST['nombre'];
+    $nombre_corto = $_POST['nombre_corto'];
+    $precio = $_POST['precio'];
+    $familia = $_POST['familia'];
+    $descripcion = $_POST['descripcion'];
+
+    $sql = "INSERT INTO productos (nombre, nombre_corto, pvp, familia, descripcion) VALUES ('$nombre', '$nombre_corto', '$precio', '$familia', '$descripcion')";
+    if ($conexionProyecto->exec($sql)) {
+        echo "Producto insertado correctamente.";
+    } else {
+        echo "Error al insertar el producto: " . $conexionProyecto->error;
+    }
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,9 +33,8 @@
 </head>
 <body>
 <h2>Crear Producto</h2>
-<?php
-?>
-<form action="procesar_formulario.php" method="post">
+
+<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" name="nombre" required>
 
@@ -19,11 +42,18 @@
     <input type="text" id="nombre_corto" name="nombre_corto" required><br><br>
 
     <label for="precio">Precio:</label>
-    <input type="text" id="precio" name="precio" required>
+    <input type="number" id="precio" name="precio" required>
 
     <label for="familia">Familia:</label>
     <select id="familia" name="familia">
-        <option value=""></option>
+        <?php
+
+        $resultado = $conexionProyecto->query('SELECT cod, nombre FROM familias');
+        while ($familia = $resultado->fetch(PDO::FETCH_OBJ)) {
+            echo "<option value='$familia->cod'>$familia->nombre</option>";
+        }
+        ?>
+        <option value="consolas">prueba</option>
         <!-- Aquí puedes agregar opciones para el campo Familia -->
     </select><br><br>
 
