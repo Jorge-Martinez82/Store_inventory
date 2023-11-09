@@ -37,9 +37,13 @@ while ($stock = $resultado->fetch(PDO::FETCH_OBJ)) {
     echo "<td>" . $stock->nombre . "</td>"; // Nombre, muestra el Nombre
     echo "<td>
             <form action='borrar.php' method='post'>
-                            <input type='hidden' name='id' value='{$stock->id}'>
-                            <input type='submit' value='Borrar'>
-                        </form>
+                <input type='hidden' name='id' value='{$stock->id}'>
+                <input type='submit' value='Borrar'>
+            </form>
+            <form action='update.php' method='get'>
+                <input type='hidden' name='id' value='{$stock->id}'>
+                <input type='submit' value='Actualizar'>
+            </form>
             </td>";
     echo "</tr>";
 }

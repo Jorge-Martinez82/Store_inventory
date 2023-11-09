@@ -36,29 +36,26 @@ if (isset($_POST['nombre']) &&
 
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre" required>
+    <input type="text" name="nombre" required>
 
     <label for="nombre_corto">Nombre corto:</label>
-    <input type="text" id="nombre_corto" name="nombre_corto" required><br><br>
+    <input type="text" name="nombre_corto" required><br><br>
 
     <label for="precio">Precio:</label>
-    <input type="number" id="precio" name="precio" required>
+    <input type="number" name="precio" required>
 
     <label for="familia">Familia:</label>
-    <select id="familia" name="familia">
+    <select name="familia">
         <?php
-
         $resultado = $conexionProyecto->query('SELECT cod, nombre FROM familias');
         while ($familia = $resultado->fetch(PDO::FETCH_OBJ)) {
             echo "<option value='$familia->cod'>$familia->nombre</option>";
         }
         ?>
-        <option value="consolas">prueba</option>
-        <!-- Aquí puedes agregar opciones para el campo Familia -->
     </select><br><br>
 
     <label for="descripcion">Descripción:</label><br>
-    <textarea id="descripcion" name="descripcion" rows="4" cols="50" required></textarea><br><br>
+    <textarea name="descripcion" rows="4" cols="50" required></textarea><br><br>
 
     <input type="submit" name="crear" value="Crear">
     <input type="reset" value="Limpiar">
