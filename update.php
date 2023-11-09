@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['id'])) {
     if ($producto) {
         // Mostrar formulario con detalles del producto
         echo "<form action='update.php' method='post'>";
-              echo "<input type='hidden' name='id' value='1'>";
+              echo "<input type='hidden' name='id' value='$producto->id'>";
 
         echo "<label for='nombre'>Nombre:</label>
           <input type='text' name='nombre' value = '$producto->nombre'>";
