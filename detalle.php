@@ -14,14 +14,14 @@ if (isset($_GET['id'])) {
                   PVP (€): {$producto->pvp} </br>
                   Descripcion: {$producto->descripcion}</td></tr>";
     echo "</table>";
+    echo "<form action='listado.php' method='post'>
+    <input type='submit' value='Volver'>
+    </form>";
 
 
 } else {
     header('Location: listado.php');
     exit;
 }
-echo "<form action='listado.php' method='post'>            
-      <input type='submit' value='Volver'>
-      </form>";
 $conexionProyecto = null;
 ?>
