@@ -53,6 +53,9 @@ if (isset($_POST['id'])) {
                             familia = '$familia',
                             descripcion = '$descripcion'
         WHERE id = $id";
+    if ($conexionProyecto->exec($sql)) {
+        echo "Producto actualizado correctamente.";
+    }
     echo "<form action='listado.php' method='post'>            
       <input type='submit' value='Volver'>
       </form>";
