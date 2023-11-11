@@ -2,7 +2,7 @@
 require 'conexion.php';
 global $conexionProyecto;
 
-if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['id'])) {
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $resultado = $conexionProyecto->query("SELECT * FROM productos WHERE id = $id");
     $producto = $resultado->fetch(PDO::FETCH_OBJ);
@@ -18,8 +18,15 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['id'])) {
           <input type='text' name='nombre_corto' value = $producto->nombre_corto required><br><br>";
         echo "<label for='precio'>Precio:</label>
           <input type='text' name='precio' value = $producto->pvp required><br><br>";
-        echo "<label for='familia'>Familia:</label>
-          <input type='text' name='familia' value = $producto->familia required><br><br>";
+        echo "<label for='familia'>Familia:</label>";
+        echo "<select name='familia'>";
+        echo "<option value='$producto->familia' selected>$producto->familia</option>";
+        $resultadoFamilias = $conexionProyecto->query('SELECT familia FROM productos');
+        while ($filaFamilia = $resultadoFamilias->fetch(PDO::FETCH_OBJ)) {
+            echo "<option value='$filaFamilia->familia'>$filaFamilia->familia</option>";
+        }
+        echo "</select><br><br>";
+
         echo "<label for='descripcion'>Descripcion:</label>
           <textarea name='descripcion' rows='4' cols='50' required>$producto->descripcion</textarea><br><br>";
             echo   "<input type='submit' name='modificar' value='Modificar'>";
@@ -32,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET" && isset($_GET['id'])) {
     }
 }
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['id'])) {
+if (isset($_POST['id'])) {
     // Procesar el formulario y actualizar la base de datos
     $id = $_POST['id'];
     $nombre = $_POST['nombre'];
@@ -49,9 +56,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['id'])) {
 
     if ($conexionProyecto->exec($sql)) {
     echo "Producto actualizado correctamente.";
+    }
     echo "<form action='listado.php' method='post'>            
       <input type='submit' value='Volver'>
       </form>";
-    }
+
 }
 ?>
