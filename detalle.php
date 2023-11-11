@@ -21,7 +21,6 @@ if (isset($_GET['id'])) {
 
 } else {
     header('Location: listado.php');
-    exit;
 }
 $conexionProyecto = null;
 ?>
