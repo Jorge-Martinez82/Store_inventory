@@ -9,10 +9,10 @@ if (isset($_POST['nombre']) &&
     $nombre = $_POST['nombre'];
     $nombre_corto = $_POST['nombre_corto'];
     $precio = $_POST['precio'];
-    $familia = $_POST['familia'];
+    $objetoFamilia = $_POST['familia'];
     $descripcion = $_POST['descripcion'];
 
-    $sql = "INSERT INTO productos (nombre, nombre_corto, pvp, familia, descripcion) VALUES ('$nombre', '$nombre_corto', '$precio', '$familia', '$descripcion')";
+    $sql = "INSERT INTO productos (nombre, nombre_corto, pvp, familia, descripcion) VALUES ('$nombre', '$nombre_corto', '$precio', '$objetoFamilia', '$descripcion')";
     if ($conexionProyecto->exec($sql)) {
         echo "Producto insertado correctamente.";
     } else {
@@ -47,9 +47,9 @@ if (isset($_POST['nombre']) &&
     <label for="familia">Familia:</label>
     <select name="familia">
         <?php
-        $resultado = $conexionProyecto->query('SELECT cod, nombre FROM familias');
-        while ($familia = $resultado->fetch(PDO::FETCH_OBJ)) {
-            echo "<option value='$familia->cod'>$familia->nombre</option>";
+        $consulta = $conexionProyecto->query('SELECT cod, nombre FROM familias');
+        while ($objetoFamilia = $consulta->fetch(PDO::FETCH_OBJ)) {
+            echo "<option value='$objetoFamilia->cod'>$objetoFamilia->nombre</option>";
         }
         ?>
     </select><br><br>

@@ -3,8 +3,8 @@ global $conexionProyecto;
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     require 'conexion.php';
-    $resultado = $conexionProyecto->query("SELECT * FROM productos WHERE id = $id");
-    $producto = $resultado->fetch(PDO::FETCH_OBJ);
+    $consulta = $conexionProyecto->query("SELECT * FROM productos WHERE id = $id");
+    $producto = $consulta->fetch(PDO::FETCH_OBJ);
     echo "<h2>Detalle del producto</h2>";
     echo "<table>";
     echo "<tr><th>{$producto->nombre}</th></tr>";

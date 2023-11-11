@@ -4,40 +4,40 @@ global $conexionProyecto;
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $resultado = $conexionProyecto->query("SELECT * FROM productos WHERE id = $id");
-    $producto = $resultado->fetch(PDO::FETCH_OBJ);
+    $consulta = $conexionProyecto->query("SELECT * FROM productos WHERE id = $id");
+    $producto = $consulta->fetch(PDO::FETCH_OBJ);
 
     if ($producto) {
         // Mostrar formulario con detalles del producto
         echo "<form action='update.php' method='post'>";
-              echo "<input type='hidden' name='id' value='$producto->id'>";
-
+        echo "<input type='hidden' name='id' value='$producto->id'>";
         echo "<label for='nombre'>Nombre:</label>
-          <input type='text' name='nombre' value = '$producto->nombre'>";
+                <input type='text' name='nombre' value = '$producto->nombre'>";
         echo "<label for='nombre_corto'>Nombre corto:</label>
-          <input type='text' name='nombre_corto' value = $producto->nombre_corto required><br><br>";
+                <input type='text' name='nombre_corto' value = $producto->nombre_corto required><br><br>";
         echo "<label for='precio'>Precio:</label>
-          <input type='text' name='precio' value = $producto->pvp required><br><br>";
+                <input type='text' name='precio' value = $producto->pvp required><br><br>";
+
         echo "<label for='familia'>Familia:</label>";
         echo "<select name='familia'>";
         echo "<option value='$producto->familia' selected>$producto->familia</option>";
-        $resultadoFamilias = $conexionProyecto->query('SELECT familia FROM productos');
-        while ($filaFamilia = $resultadoFamilias->fetch(PDO::FETCH_OBJ)) {
-            echo "<option value='$filaFamilia->familia'>$filaFamilia->familia</option>";
+        $consultaFamilia = $conexionProyecto->query('SELECT cod, nombre FROM familias');
+        while ($objetoFamilia = $consultaFamilia->fetch(PDO::FETCH_OBJ)) {
+            echo "<option value='$objetoFamilia->cod'>$objetoFamilia->nombre</option>";
         }
         echo "</select><br><br>";
 
         echo "<label for='descripcion'>Descripcion:</label>
           <textarea name='descripcion' rows='4' cols='50' required>$producto->descripcion</textarea><br><br>";
-            echo   "<input type='submit' name='modificar' value='Modificar'>";
-              echo "</form>";
+        echo "<input type='submit' name='modificar' value='Modificar'>";
+        echo "</form>";
         echo "<form action='listado.php' method='post'>            
       <input type='submit' value='Volver'>
       </form>";
     }
-}   else {
+} else {
     header('Location: listado.php');
-    }
+}
 
 if (isset($_POST['id'])) {
     // Procesar el formulario y actualizar la base de datos
