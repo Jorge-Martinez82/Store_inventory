@@ -3,7 +3,7 @@ global $conexionProyecto;
 // Compruebo si se ha definido id en la URL y de hacerlo, defino la variable 'id'
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    // Establezco la conexion a la base de datos definida en 'conexion.php'
+    // Establezco la conexión a la base de datos definida en 'conexion.php'
     require 'conexion.php';
 
     // Preparo y ejecuto una consulta preparada para evitar la inyeccion SQL
@@ -30,10 +30,10 @@ if (isset($_GET['id'])) {
     <input type='submit' value='Volver'>
     </form>";
 
-// Redirijo a la pagina listado.php si no se proporciona el parámetro 'id'
+// Redirijo a la página listado.php si no se proporciona el parámetro 'id'
 } else {
     header('Location: listado.php');
 }
-// Cierro la conexion
+// Cierro la conexión
 $conexionProyecto = null;
 ?>

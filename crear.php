@@ -1,5 +1,5 @@
 <?php
-// Establezco la conexion a la base de datos definida en 'conexion.php'
+// Establezco la conexión a la base de datos definida en 'conexion.php'
 require 'conexion.php';
 global $conexionProyecto;
 
@@ -59,9 +59,9 @@ if (isset($_POST['nombre']) &&
     <label for="familia">Familia:</label>
     <select name="familia">
         <?php
-        // Realizo una consulta de los nombres y codigos de la tabla familias
+        // Realizo una consulta de los nombres y códigos de la tabla familias
         $consulta = $conexionProyecto->query('SELECT cod, nombre FROM familias');
-        // En cada etiqueta <option> se mostrara el nombre de la familia y su valor será el codigo
+        // En cada etiqueta <option> se mostrara el nombre de la familia y su valor será el código
         while ($objetoFamilia = $consulta->fetch(PDO::FETCH_OBJ)) {
             echo "<option value='$objetoFamilia->cod'>$objetoFamilia->nombre</option>";
         }

@@ -10,7 +10,7 @@
 <body>
 
 <?php
-// Establezco la conexion a la base de datos definida en 'conexion.php'
+// Establezco la conexión a la base de datos definida en 'conexion.php'
 require 'conexion.php';
 global $conexionProyecto;
 
@@ -20,12 +20,12 @@ $consulta = $conexionProyecto->query('SELECT id, nombre FROM productos');
 
 echo "<h2>Gestión de productos</h2>";
 
-// Creo el boton en formulario que me llevara a la pagina crear.php
+// Creo el botón en formulario que me llevará a la pagina crear.php
 echo "<form action='crear.php' method='post'>
         <input type='submit' value='Crear'>
       </form>";
 
-// Creo una tabla que mostrara el nombre y codigo del producto ademas de
+// Creo una tabla que mostrara el nombre y código del producto además de
 // los botones que permitiran ir a detalle.php, borrar.php y update.php
 echo "<table>
       <tr>
@@ -35,9 +35,9 @@ echo "<table>
         <th>Acciones</th>
       </tr>";
 
-// Este bucle creara una fila para cada producto que haya en la base de datos
-// en la primra columna estara el boton detalle
-// en la segunda el codigo del producto
+// Este bucle creará una fila para cada producto que haya en la base de datos
+// en la primra columna estará el boton detalle
+// en la segunda el código del producto
 // en la tercera el nombre
 // en la cuarta los botones Actualizar y Borrar
 while ($productos = $consulta->fetch(PDO::FETCH_OBJ)) {
@@ -63,7 +63,7 @@ while ($productos = $consulta->fetch(PDO::FETCH_OBJ)) {
     echo "</tr>";
 }
 echo "</table>";
-// Cierro la conexion
+// Cierro la conexión
 $conexionProyecto = null;
 ?>
 </body>
