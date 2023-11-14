@@ -1,12 +1,17 @@
 <?php
+// Establezco la conexión a la base de datos definida en 'conexion.php'
 require 'conexion.php';
 global $conexionProyecto;
-
+// Compruebo si se ha definido la id en la URL y de hacerlo, defino la variable 'id'
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $consulta = $conexionProyecto->query("SELECT * FROM productos WHERE id = $id");
-    $producto = $consulta->fetch(PDO::FETCH_OBJ);
 
+    // Preparo y ejecuto una consulta preparada para evitar la inyeccion SQL
+    $consulta = $conexionProyecto->prepare("SELECT * FROM productos WHERE id = :id");
+    $consulta->bindParam(':id', $id);
+    $consulta->execute();
+    // Obtengo el objeto de la consulta
+    $producto = $consulta->fetch(PDO::FETCH_OBJ);
     if ($producto) {
         // Mostrar formulario con detalles del producto
         echo "<form action='update.php' method='post'>";
@@ -18,9 +23,13 @@ if (isset($_GET['id'])) {
         echo "<label for='precio'>Precio:</label>
                 <input type='text' name='precio' value = $producto->pvp required><br><br>";
 
+        // Para el campo familia tengo que realizar otra consulta para obtener todos
+        // los campos nombre y codigo de la tabla familia y asi poder mostrarlos
         echo "<label for='familia'>Familia:</label>";
         echo "<select name='familia'>";
+        // primero muestro la etiqueta <option> con el campo familia del producto utilizando 'selected'
         echo "<option value='$producto->familia' selected>$producto->familia</option>";
+        // despues hago la consulta y muestro el resto de resultados
         $consultaFamilia = $conexionProyecto->query('SELECT cod, nombre FROM familias');
         while ($objetoFamilia = $consultaFamilia->fetch(PDO::FETCH_OBJ)) {
             echo "<option value='$objetoFamilia->cod'>$objetoFamilia->nombre</option>";
@@ -35,30 +44,45 @@ if (isset($_GET['id'])) {
       <input type='submit' value='Volver'>
       </form>";
     }
-} else {
+}
+// Redirijo a la página listado.php si no se proporciona el parámetro 'id'
+else {
     header('Location: listado.php');
 }
 
-if (isset($_POST['id'])) {
-    // Procesar el formulario y actualizar la base de datos
+// Compruebo que los campos del nuevo formulario has sido definidos y de hacerlo
+// defino las variables
+if (isset($_POST['nombre']) &&
+    isset($_POST['nombre_corto']) &&
+    isset($_POST['precio']) &&
+    isset($_POST['familia']) &&
+    isset($_POST['descripcion'])){
     $id = $_POST['id'];
     $nombre = $_POST['nombre'];
     $nombre_corto = $_POST['nombre_corto'];
     $precio = $_POST['precio'];
     $familia = $_POST['familia'];
     $descripcion = $_POST['descripcion'];
-    $sql = "UPDATE productos SET nombre = '$nombre', 
-                            nombre_corto = '$nombre_corto',
-                            pvp = '$precio',
-                            familia = '$familia',
-                            descripcion = '$descripcion'
-        WHERE id = $id";
-    if ($conexionProyecto->exec($sql)) {
+
+    // Creo, preparo y ejecuto la consulta preparada
+    $sql = "UPDATE productos SET nombre = :nombre, 
+                                    nombre_corto = :nombre_corto,
+                                    pvp = :precio,
+                                    familia = :familia,
+                                    descripcion = :descripcion
+            WHERE id = :id";
+    $stmt = $conexionProyecto->prepare($sql);
+    $stmt->bindParam(':id', $id);
+    $stmt->bindParam(':nombre', $nombre);
+    $stmt->bindParam(':nombre_corto', $nombre_corto);
+    $stmt->bindParam(':precio', $precio);
+    $stmt->bindParam(':familia', $familia);
+    $stmt->bindParam(':descripcion', $descripcion);
+    if ($stmt->execute()) {
         echo "Producto actualizado correctamente.";
     }
     echo "<form action='listado.php' method='post'>            
       <input type='submit' value='Volver'>
       </form>";
-
 }
 ?>
