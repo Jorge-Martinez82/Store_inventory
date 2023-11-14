@@ -1,10 +1,20 @@
 <?php
 global $conexionProyecto;
+// Compruebo si se ha definido id en la URL y de hacerlo, defino la variable 'id'
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
+    // Establezco la conexion a la base de datos definida en 'conexion.php'
     require 'conexion.php';
-    $consulta = $conexionProyecto->query("SELECT * FROM productos WHERE id = $id");
+
+    // Preparo y ejecuto una consulta preparada para evitar la inyeccion SQL
+    $consulta = $conexionProyecto->prepare("SELECT * FROM productos WHERE id = :id");
+    $consulta->bindParam(':id', $id);
+    $consulta->execute();
+
+    // Obtengo el objeto de la consulta
     $producto = $consulta->fetch(PDO::FETCH_OBJ);
+
+    // Imprimo los detalles del objeto producto
     echo "<h2>Detalle del producto</h2>";
     echo "<table>";
     echo "<tr><th>{$producto->nombre}</th></tr>";
@@ -14,13 +24,16 @@ if (isset($_GET['id'])) {
                   PVP (€): {$producto->pvp} </br>
                   Descripcion: {$producto->descripcion}</td></tr>";
     echo "</table>";
+
+    // Boton en formulario para volver a listado.php
     echo "<form action='listado.php' method='post'>
     <input type='submit' value='Volver'>
     </form>";
 
-
+// Redirijo a la pagina listado.php si no se proporciona el parámetro 'id'
 } else {
     header('Location: listado.php');
 }
+// Cierro la conexion
 $conexionProyecto = null;
 ?>
