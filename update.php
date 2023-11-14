@@ -14,14 +14,15 @@ if (isset($_GET['id'])) {
     $producto = $consulta->fetch(PDO::FETCH_OBJ);
     if ($producto) {
         // Mostrar formulario con detalles del producto
+        echo "<h2>Modificar Producto</h2>";
         echo "<form action='update.php' method='post'>";
         echo "<input type='hidden' name='id' value='$producto->id'>";
         echo "<label for='nombre'>Nombre:</label>
                 <input type='text' name='nombre' value = '$producto->nombre'>";
         echo "<label for='nombre_corto'>Nombre corto:</label>
                 <input type='text' name='nombre_corto' value = $producto->nombre_corto required><br><br>";
-        echo "<label for='precio'>Precio:</label>
-                <input type='text' name='precio' value = $producto->pvp required><br><br>";
+        echo "<label for='precio'>Precio (€):</label>
+                <input type='text' name='precio' value = $producto->pvp required>";
 
         // Para el campo familia tengo que realizar otra consulta para obtener todos
         // los campos nombre y codigo de la tabla familia y asi poder mostrarlos
@@ -36,13 +37,13 @@ if (isset($_GET['id'])) {
         }
         echo "</select><br><br>";
 
-        echo "<label for='descripcion'>Descripcion:</label>
-          <textarea name='descripcion' rows='4' cols='50' required>$producto->descripcion</textarea><br><br>";
-        echo "<input type='submit' name='modificar' value='Modificar'>";
+        echo "<label for='descripcion'>Descripcion:</label><br>
+          <textarea name='descripcion' rows='5' cols='80' required>$producto->descripcion</textarea><br><br>";
+        echo "<input class='crear2' type='submit' name='modificar' value='Modificar'>";
         echo "</form>";
         echo "<form action='listado.php' method='post'>            
-      <input type='submit' value='Volver'>
-      </form>";
+              <input class='volver' type='submit' value='Volver'>
+              </form>";
     }
 }
 // Redirijo a la página listado.php si no se proporciona el parámetro 'id'
@@ -86,3 +87,17 @@ if (isset($_POST['nombre']) &&
       </form>";
 }
 ?>
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="estilos.css">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Modificar</title>
+</head>
+<body>
+
+</body>
+</html>

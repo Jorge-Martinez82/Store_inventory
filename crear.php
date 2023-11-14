@@ -37,6 +37,7 @@ if (isset($_POST['nombre']) &&
 <!doctype html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="estilos.css">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -47,13 +48,14 @@ if (isset($_POST['nombre']) &&
 <h2>Crear Producto</h2>
 
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+
     <label for="nombre">Nombre:</label>
     <input type="text" name="nombre" required>
 
     <label for="nombre_corto">Nombre corto:</label>
     <input type="text" name="nombre_corto" required><br><br>
 
-    <label for="precio">Precio:</label>
+    <label for="precio">Precio (€):</label>
     <input type="number" name="precio" required>
 
     <label for="familia">Familia:</label>
@@ -68,10 +70,10 @@ if (isset($_POST['nombre']) &&
         ?>
     </select><br><br>
     <label for="descripcion">Descripción:</label><br>
-    <textarea name="descripcion" rows="4" cols="50" required></textarea><br><br>
-    <input type="submit" name="crear" value="Crear">
-    <input type="reset" value="Limpiar">
-    <a href="listado.php"><input type="button" value="Volver"></a>
+    <textarea name="descripcion" rows="5" cols="80" required></textarea><br><br>
+    <input class="crear2" type="submit" name="crear" value="Crear">
+    <input class="limpiar" type="reset" value="Limpiar">
+    <a href="listado.php"><input class="volver" type="button" value="Volver"></a>
 </form>
 </body>
 </html>

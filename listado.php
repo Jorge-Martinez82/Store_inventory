@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="estilos.css">
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tarea03</title>
+    <title>Listado</title>
 </head>
 <body>
-
 <?php
 // Establezco la conexión a la base de datos definida en 'conexion.php'
 require 'conexion.php';
@@ -22,7 +22,7 @@ echo "<h2>Gestión de productos</h2>";
 
 // Creo el botón en formulario que me llevará a la pagina crear.php
 echo "<form action='crear.php' method='post'>
-        <input type='submit' value='Crear'>
+        <input class='crear' type='submit' value='Crear'>
       </form>";
 
 // Creo una tabla que mostrara el nombre y código del producto además de
@@ -45,20 +45,21 @@ while ($productos = $consulta->fetch(PDO::FETCH_OBJ)) {
     echo "<td>
             <form action='detalle.php' method='get'>
                 <input type='hidden' name='id' value='{$productos->id}'>
-                <input type='submit' value='Detalle'>
+                <input class='detalle' type='submit' value='Detalle'>
             </form>
           </td>";
     echo "<td>" . $productos->id . "</td>";
     echo "<td>" . $productos->nombre . "</td>";
     echo "<td>
-            <form action='borrar.php' method='post'>
+            <form style='float:left;' action='borrar.php' method='post'>
                 <input type='hidden' name='id' value='{$productos->id}'>
-                <input type='submit' value='Borrar'>
+                <input class='borrar' type='submit' value='Borrar'>
             </form>
-            <form action='update.php' method='get'>
+            <form style='float:right;' action='update.php'>
                 <input type='hidden' name='id' value='{$productos->id}'>
-                <input type='submit' value='Actualizar'>
+                <input class='actualizar' type='submit' value='Actualizar'>
             </form>
+
             </td>";
     echo "</tr>";
 }
