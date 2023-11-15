@@ -27,7 +27,7 @@ echo "<form action='crear.php' method='post'>
 
 // Creo una tabla que mostrara el nombre y código del producto además de
 // los botones que permitiran ir a detalle.php, borrar.php y update.php
-echo "<table>
+echo "<table class='tablalistado'>
       <tr>
         <th>Detalle</th>
         <th>Código</th>
@@ -51,11 +51,11 @@ while ($productos = $consulta->fetch(PDO::FETCH_OBJ)) {
     echo "<td>" . $productos->id . "</td>";
     echo "<td>" . $productos->nombre . "</td>";
     echo "<td>
-            <form style='float:left;' action='borrar.php' method='post'>
+            <form style='float:right;' action='borrar.php' method='post'>
                 <input type='hidden' name='id' value='{$productos->id}'>
                 <input class='borrar' type='submit' value='Borrar'>
             </form>
-            <form style='float:right;' action='update.php'>
+            <form style='float:left;' action='update.php'>
                 <input type='hidden' name='id' value='{$productos->id}'>
                 <input class='actualizar' type='submit' value='Actualizar'>
             </form>

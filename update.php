@@ -15,18 +15,17 @@ if (isset($_GET['id'])) {
     if ($producto) {
         // Mostrar formulario con detalles del producto
         echo "<h2>Modificar Producto</h2>";
-        echo "<form action='update.php' method='post'>";
+        echo "<form class='formcrear' action='update.php' method='post'>";
         echo "<input type='hidden' name='id' value='$producto->id'>";
-        echo "<label for='nombre'>Nombre:</label>
-                <input type='text' name='nombre' value = '$producto->nombre'>";
-        echo "<label for='nombre_corto'>Nombre corto:</label>
-                <input type='text' name='nombre_corto' value = $producto->nombre_corto required><br><br>";
-        echo "<label for='precio'>Precio (€):</label>
-                <input type='text' name='precio' value = $producto->pvp required>";
-
+        echo "<div class='div1'><label for='nombre'>Nombre:</label><br>
+              <input class='inputtext' type='text' name='nombre' value='$producto->nombre' required></div>";
+        echo "<div class='div2'><label for='nombre_corto'>Nombre corto:</label><br>
+              <input class='inputtext' type='text' name='nombre_corto' value = $producto->nombre_corto required></div>";
+        echo "<div class='div3'><label for='precio'>Precio (€):</label><br>
+                <input class='inputtext' type='text' name='precio' value = $producto->pvp required></div>";
         // Para el campo familia tengo que realizar otra consulta para obtener todos
         // los campos nombre y codigo de la tabla familia y asi poder mostrarlos
-        echo "<label for='familia'>Familia:</label>";
+        echo "<div class='div4'><label for='familia'>Familia:</label><br>";
         echo "<select name='familia'>";
         // primero muestro la etiqueta <option> con el campo familia del producto utilizando 'selected'
         echo "<option value='$producto->familia' selected>$producto->familia</option>";
@@ -35,15 +34,15 @@ if (isset($_GET['id'])) {
         while ($objetoFamilia = $consultaFamilia->fetch(PDO::FETCH_OBJ)) {
             echo "<option value='$objetoFamilia->cod'>$objetoFamilia->nombre</option>";
         }
-        echo "</select><br><br>";
+        echo "</select></div>";
+        echo "<div class='div5'><label for='descripcion'>Descripcion:</label><br>
+          <textarea name='descripcion' rows='5' cols='80' required>$producto->descripcion</textarea></div>";
 
-        echo "<label for='descripcion'>Descripcion:</label><br>
-          <textarea name='descripcion' rows='5' cols='80' required>$producto->descripcion</textarea><br><br>";
-        echo "<input class='crear2' type='submit' name='modificar' value='Modificar'>";
-        echo "</form>";
+        echo "<div class='div6'><input class='crear2' type='submit' name='modificar' value='Modificar'>";
         echo "<form action='listado.php' method='post'>            
               <input class='volver' type='submit' value='Volver'>
-              </form>";
+              </form></div>";
+        echo "</form>";
     }
 }
 // Redirijo a la página listado.php si no se proporciona el parámetro 'id'
