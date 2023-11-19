@@ -17,9 +17,7 @@ global $conexionProyecto;
 // Realizo la consulta SQL para obtener el listado
 $consulta = $conexionProyecto->query('SELECT id, nombre FROM productos');
 
-
 echo "<h2>Gestión de productos</h2>";
-
 // Creo el botón en formulario que me llevará a la pagina crear.php
 echo "<form action='crear.php' method='post'>
         <input class='crear' type='submit' value='Crear'>
