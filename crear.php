@@ -1,3 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="estilos.css">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Crear producto</title>
+</head>
+<body>
 <?php
 // Establezco la conexión a la base de datos definida en 'conexion.php'
 require 'conexion.php';
@@ -29,24 +40,11 @@ if (isset($_POST['nombre']) &&
         echo "Error al insertar el producto: " . $stmt->errorInfo()[2];// Imprime el mensaje de error de haberlo
     }
 }
-
 ?>
 
+<h2>Crear Producto</h2>
 <!-- Creo el formulario para añadir un producto con los campos necesarios
  y los botones crear, limpiar y volver.-->
-<!doctype html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="estilos.css">
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Crear producto</title>
-</head>
-<body>
-<h2>Crear Producto</h2>
-
 <form class="formcrear" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     <div class="div1">
     <label for="nombre">Nombre:</label><br>
