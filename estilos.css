@@ -10,7 +10,7 @@ table{
     background: dimgrey;
     margin: 1em;
     color: white;
-    border: none;
+    border-collapse:collapse;
 }
 td{
     padding: 0.5em;
@@ -25,21 +25,55 @@ tbody tr:nth-child(odd) {
     background: #2f95bb;
     color: white;
     border-radius: 5px;
+    border: none;
+    padding: 0.5em;
 }
+.detalle:hover{
+    background-color: #176c8b;
+}
+.detalle:active {
+    transform: translateY(1px);}
+
 .borrar{
-    background: red;
+    background: #e50202;
     color: white;
     border-radius: 5px;
+    border: none;
+    padding: 0.5em;
 }
+.borrar:hover{
+    background-color: #ab0202;
+}
+.borrar:active {
+    transform: translateY(1px);}
+
 .actualizar{
     background: orange;
     border-radius: 5px;
+    border: none;
+    margin-right: 0.5em;
+    padding: 0.5em;
 }
+.actualizar:hover{
+    background-color: #d88c01;
+}
+.actualizar:active {
+    transform: translateY(1px);}
+
 .crear{
     background: green;
     color: white;
     border-radius: 5px;
+    border: none;
+    margin-left: -24em;
+    padding: 0.5em;
 }
+.crear:hover{
+    background-color: #016301;
+}
+.crear:active {
+    transform: translateY(1px);}
+
 .tabladetalle{
     width: 60%;
 }
@@ -47,17 +81,41 @@ tbody tr:nth-child(odd) {
     color: white;
     background: #3737e5;
     border-radius: 5px;
+    border: none;
+    padding: 0.5em;
 }
+.crear2:hover{
+    background-color: #2e2ebf;
+}
+.crear2:active {
+    transform: translateY(1px);}
+
 .limpiar{
     color: white;
     background: #1a8d1a;
     border-radius: 5px;
+    border: none;
+    padding: 0.5em;
 }
+.limpiar:hover{
+    background-color: #126412;
+}
+.limpiar:active {
+    transform: translateY(1px);}
+
 .volver{
     color: white;
     background: #2f95bb;
     border-radius: 5px;
+    border: none;
+    padding: 0.5em;
 }
+.volver:hover{
+    background-color: #267592;
+}
+.volver:active {
+    transform: translateY(1px);}
+
 .formcrear{
     display: grid;
     grid-template-columns: repeat(2, 0.5fr);
