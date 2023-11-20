@@ -49,15 +49,15 @@ if (isset($_POST['nombre']) &&
 <form class="formcrear" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     <div class="div1">
     <label for="nombre">Nombre:</label><br>
-    <input class="inputtext" type="text" name="nombre" required>
+    <input class="inputtext" type="text" name="nombre" placeholder="Nombre" required>
     </div>
     <div class="div2">
     <label for="nombre_corto">Nombre corto:</label><br>
-    <input class="inputtext" type="text" name="nombre_corto" required>
+    <input class="inputtext" type="text" name="nombre_corto" placeholder="Nombre corto" required>
     </div>
     <div class="div3">
     <label for="precio">Precio (€):</label><br>
-    <input class="inputtext" type="number" name="precio" required>
+    <input class="inputtext" type="number" name="precio" placeholder="Precio (€)" required>
     </div>
     <div class="div4">
     <label for="familia">Familia:</label><br>
