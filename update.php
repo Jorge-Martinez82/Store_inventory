@@ -1,3 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="estilos.css">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Modificar</title>
+</head>
+<body>
 <?php
 // Establezco la conexión a la base de datos definida en 'conexion.php'
 require 'conexion.php';
@@ -12,7 +23,7 @@ if (isset($_GET['id'])) {
     $consulta->execute();
     // Obtengo el objeto de la consulta
     $producto = $consulta->fetch(PDO::FETCH_OBJ);
-    if ($producto) {
+
         // Mostrar formulario con detalles del producto
         echo "<h2>Modificar Producto</h2>";
         echo "<form class='formcrear' action='update.php' method='post'>";
@@ -23,6 +34,7 @@ if (isset($_GET['id'])) {
               <input class='inputtext' type='text' name='nombre_corto' value = $producto->nombre_corto required></div>";
         echo "<div class='div3'><label for='precio'>Precio (€):</label><br>
                 <input class='inputtext' type='text' name='precio' value = $producto->pvp required></div>";
+
         // Para el campo familia tengo que realizar otra consulta para obtener todos
         // los campos nombre y codigo de la tabla familia y asi poder mostrarlos
         echo "<div class='div4'><label for='familia'>Familia:</label><br>";
@@ -43,7 +55,7 @@ if (isset($_GET['id'])) {
               <input class='volver' type='submit' value='Volver'>
               </form></div>";
         echo "</form>";
-    }
+
 }
 // Redirijo a la página listado.php si no se proporciona el parámetro 'id'
 else {
@@ -86,17 +98,5 @@ if (isset($_POST['nombre']) &&
       </form>";
 }
 ?>
-<!doctype html>
-<html lang="en">
-<head>
-    <link rel="stylesheet" href="estilos.css">
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Modificar</title>
-</head>
-<body>
-
 </body>
 </html>
