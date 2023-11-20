@@ -97,6 +97,8 @@ if (isset($_POST['nombre']) &&
       <input type='submit' value='Volver'>
       </form>";
 }
+$conexionProyecto = null;
 ?>
+
 </body>
 </html>

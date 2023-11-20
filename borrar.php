@@ -20,3 +20,5 @@ if (isset($_POST['id'])) {
 echo "<form action='listado.php' method='post'>            
       <input type='submit' value='Volver'>
       </form>";
+$conexionProyecto = null;
+?>

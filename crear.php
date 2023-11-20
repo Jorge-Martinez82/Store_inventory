@@ -40,6 +40,7 @@ if (isset($_POST['nombre']) &&
         echo "Error al insertar el producto: " . $stmt->errorInfo()[2];// Imprime el mensaje de error de haberlo
     }
 }
+
 ?>
 
 <h2>Crear Producto</h2>
